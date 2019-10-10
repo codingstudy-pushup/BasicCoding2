@@ -35,4 +35,14 @@ public class ListTest {
 		return array;
 	}
 	
+	List<int[]> intArrayList = new ArrayList();
+
+	for(List<Integer> intList : intListList){
+    		int[] intArray = new int[intList.size()];
+    		for(int i = 0; i < intArray.length; ++i){
+      		 intArray[i] = intList.get(i);
+   	 }
+    		intArrayList.add(intArray);
+}
+	
 }
