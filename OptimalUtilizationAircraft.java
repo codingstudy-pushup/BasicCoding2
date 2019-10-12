@@ -55,6 +55,133 @@ public class OptimalUtilizationAircraft {
 	    }
 	    return map.get(maxVal);
 	}
+	
+	
+	
+	package ama_online;
+import java.util.*;
+
+public class A02_OptimalAircraftUtilization_list {
+	
+	    public static void closestSum(List<List<Integer>> listA, List<List<Integer>> listB, int target) {
+	        List<List<Integer>> result = new ArrayList<List<Integer>>();
+	        int diff = Integer.MAX_VALUE;
+	        
+	        for (List<Integer> lista : listA) {
+	            int first = lista.get(1);
+	            for (List<Integer> listb : listB) {
+	                //System.out.println(result);
+	                int second = listb.get(1);
+	                if ((first+second) <=target ) {
+	                    if (target - (first+second) <  diff) {
+	                        result.clear();
+	                        result.add(new ArrayList<Integer>(Arrays.asList(lista.get(0), listb.get(0))));
+	                        diff = target - (first+second);
+	                    } else if (target - (first+second) ==  diff) {
+	                        result.add(new ArrayList<Integer>(Arrays.asList(lista.get(0), listb.get(0))));
+	                    }                                     
+	                }
+	            }          
+	        }
+	        System.out.println("Output: " + result);
+	    }
+	    public static void main(String[] args) {
+
+	        List<List<Integer>> listA = new ArrayList<List<Integer>>();
+	        List<List<Integer>> listB = new ArrayList<List<Integer>>();
+	        listA.add(new ArrayList<Integer>(Arrays.asList(1, 2000)));
+	        listA.add(new ArrayList<Integer>(Arrays.asList(2, 4000)));
+	        listA.add(new ArrayList<Integer>(Arrays.asList(3, 6000)));
+	       // listA.add(new ArrayList<Integer>(Arrays.asList(4, 10)));
+	        listB.add(new ArrayList<Integer>(Arrays.asList(1, 2000)));
+	        System.out.println("a = " + listA);
+	        System.out.println("b = " + listB);
+	        int target = 7000;
+	        System.out.println("target = " + target);
+	        closestSum(listA, listB, target);
+	        
+	        
+	        
+//	        List<List<Integer>> listA = new ArrayList<List<Integer>>();
+//	        List<List<Integer>> listB = new ArrayList<List<Integer>>();
+//	        listA.add(new ArrayList<Integer>(Arrays.asList(1, 8)));
+//	        listA.add(new ArrayList<Integer>(Arrays.asList(2, 15)));
+//	        listA.add(new ArrayList<Integer>(Arrays.asList(3, 9)));
+//	       // listA.add(new ArrayList<Integer>(Arrays.asList(4, 10)));
+//	        listB.add(new ArrayList<Integer>(Arrays.asList(1, 8)));
+//	        listB.add(new ArrayList<Integer>(Arrays.asList(2, 11)));
+//	        listB.add(new ArrayList<Integer>(Arrays.asList(3, 12)));
+//	       // listB.add(new ArrayList<Integer>(Arrays.asList(4, 5)));
+//	        System.out.println("a = " + listA);
+//	        System.out.println("b = " + listB);
+//	        int target = 20;
+//	        System.out.println("target = " + target);
+//	        closestSum(listA, listB, target);
+	    }
+}
+	
+	package ama_online;
+
+import java.util.*;
+
+public class A02_OptimalAircraftUtilization_ListInIntArray {
+
+	public static void main(String[] args) {
+		A02_OptimalAircraftUtilization_ListInIntArray main = new A02_OptimalAircraftUtilization_ListInIntArray();
+		List<int[]> a1 = Arrays.asList(new int[] { 1, 8 }, new int[] { 2, 15 }, new int[] { 3, 9 });
+		List<int[]> b1 = Arrays.asList(new int[] { 1, 8 }, new int[] { 2, 11 }, new int[] { 3, 12 });
+		List<int[]> tc1 = main.optimalUtilize(a1, b1, 20);
+
+		List<int[]> a2 = Arrays.asList(new int[] { 1, 3 }, new int[] { 2, 5 }, new int[] { 3, 7 }, new int[] { 4, 10 });
+		List<int[]> b2 = Arrays.asList(new int[] { 1, 2 }, new int[] { 2, 3 }, new int[] { 3, 4 }, new int[] { 4, 5 });
+		List<int[]> tc2 = main.optimalUtilize(a2, b2, 10);
+		for (int[] arr : tc2) {
+			System.out.println(arr[0] + "," + arr[1]);
+		}
+	}
+
+	public List<int[]> optimalUtilize(List<int[]> a, List<int[]> b, int target) {
+		int low = 0, high = b.size() - 1, aLen = a.size(), bLen = b.size();
+		Collections.sort(a, new Comparator<int[]>() {
+			@Override
+			public int compare(int[] arr1, int[] arr2) {
+				return arr1[1] - arr2[1];
+			}
+		});
+		Collections.sort(b, new Comparator<int[]>() {
+			@Override
+			public int compare(int[] arr1, int[] arr2) {
+				return arr1[1] - arr2[1];
+			}
+		});
+		int maxSum = Integer.MIN_VALUE;
+		List<int[]> result = new ArrayList<>();
+		while (low < aLen && high >= 0) {
+			int sum = a.get(low)[1] + b.get(high)[1];
+			if (sum > target) {
+				high--;
+			} else {
+				if (sum >= maxSum) {
+					if (sum > maxSum) {
+						maxSum = sum;
+						result = new ArrayList<>();
+					}
+					result.add(new int[] { a.get(low)[0], b.get(high)[0] });
+					int index = high - 1, prev = b.get(high)[1];
+					while (index > 0 && b.get(index)[1] == prev) {
+						result.add(new int[] { a.get(low)[0], b.get(high)[0] });
+						index--;
+					}
+				}
+				low++;
+			}
+		}
+		return result;
+	}
+
+}
+
+
 
 	private static List<int[]> getOptimalUtilization(int[][] a, int[][] b, int target) {
 		Arrays.sort(a, (p1, p2)->p1[1] - p2[1]);
