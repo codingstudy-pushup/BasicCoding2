@@ -21,19 +21,27 @@ class Graph {
 
 public class A11_CriticalConnections {
 
+
+	 int time = 0;
+	 final int NIL = -1;
+	 List<Integer[]> ans1 = new LinkedList<>();
+
 	public static void main(String[] args) {
+//		int n = 9;
+//		int[][] edges = { { 1, 2 }, { 1, 3 }, { 2, 3 }, { 3, 4 }, { 3, 6 }, { 4, 5 }, { 6, 7 }, { 6, 9 }, { 7, 8 },
+//				{ 8, 9 } };
+//		Input: n = 5, edges = [[1, 2], [1, 3], [3, 4], [1, 4], [4, 5]]
+		int n =5;
+		int[][] edges  = {{1, 2}, {1, 3}, {3, 4}, {1, 4}, {4, 5}};
 		A11_CriticalConnections a = new A11_CriticalConnections();
-		int n = 7;
-//		int[][] edges = { { 1, 2 }, { 1, 3 }, { 3, 4 }, { 1, 4 }, { 4, 5 } };
-		int[][] edges = { { 0, 1 }, { 0, 2 }, { 1, 3 }, { 2, 3 }, { 2, 5 }, { 5, 6 }, { 3, 4 } };
 		int[][] ans = a.bridges(edges, n);
 		if (ans.length == 0)
 			System.out.print("[]");
 		for (int[] arr : ans)
 			System.out.print(Arrays.toString(arr) + ",");
 	}
-
-	int[][] bridges(int[][] edges, int v) {
+	
+	 public int[][] bridges(int[][] edges, int v) {
 		Graph g = new Graph(v);
 		for (int i = 0; i < edges.length; i++) {
 			g.addEdge(edges[i][0], edges[i][1]);
@@ -51,6 +59,7 @@ public class A11_CriticalConnections {
 		for (int i = 0; i < v; i++) {
 			if (!visited[i]) {
 				bridgeDfs(g, i, visited, disc, low, parent);
+				System.out.println("======================");
 			}
 		}
 
@@ -63,22 +72,24 @@ public class A11_CriticalConnections {
 		}
 		return res;
 	}
+	
 
-	int time = 0;
-	final int NIL = -1;
-	List<Integer[]> ans1 = new LinkedList<>();
-
-	void bridgeDfs(Graph g, int u, boolean visited[], int disc[], int low[], int parent[]) {
+	 void bridgeDfs(Graph g, int u, boolean visited[], int disc[], int low[], int parent[]) {
 		visited[u] = true;
 		disc[u] = low[u] = ++time;
+		System.out.println("start u "+u+" disc["+u+"] "+disc[u]+" low["+u+"] "+low[u]);
 
 		Iterator<Integer> i = (g.adj[u]).iterator();
+	
 		while (i.hasNext()) {
 			int v = i.next();
+			System.out.println("u: "+u+" v "+v);
 			if (!visited[v]) {
 				parent[v] = u;
 				bridgeDfs(g, v, visited, disc, low, parent);
+				System.out.println("==escape==  "+v);
 				low[u] = Math.min(low[u], low[v]);
+				System.out.println("low["+v+"] "+low[v]+" disc["+u+"] "+disc[u] );
 				if (low[v] > disc[u])
 					ans1.add(new Integer[] { u, v });
 			} else if (v != parent[u]) {
@@ -86,5 +97,7 @@ public class A11_CriticalConnections {
 			}
 		}
 	}
+
+	
 
 }
