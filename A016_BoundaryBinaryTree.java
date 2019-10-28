@@ -121,10 +121,7 @@ public class A016_BoundaryBinaryTree {
 		return list;
 	}
 
-	// PreOrder on the left half tree to fetch left Border elements, 
-	// InOrder on the
-	// left and right half tree to fetch leaf elements 
-	// PostOrder on the right half tree to fetch right Border elements
+
 	
 	private void dfs(TreeNode root, boolean isLeftBound, boolean isRightBound, List<Integer> list) {
 		// base case
