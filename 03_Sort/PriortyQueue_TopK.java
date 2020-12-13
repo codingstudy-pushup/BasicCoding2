@@ -41,3 +41,35 @@ public int[] topKFrequent(int[] nums, int k) {
         return a;
         
     }
+
+//2
+public int[] topKFrequent(int[] nums, int k) {
+        
+        HashMap<Integer,Integer> hashmap = new HashMap<>();
+        
+
+        for(int i=0;i<nums.length;i++)
+        {
+            if(!hashmap.containsKey(nums[i]))
+                hashmap.put(nums[i],1);
+            else
+                hashmap.put(nums[i],hashmap.get(nums[i])+1);
+        }
+        
+        //Building a priorityqueue (Heap)
+        // Bigger to Smaller
+        PriorityQueue<Integer> queue = new PriorityQueue<>((a,b) -> hashmap.get(b) - hashmap.get(a));
+        
+        for(int pointer : hashmap.keySet())
+        {
+            queue.add(pointer);
+        }
+        
+        int[] result = new int[k];
+  
+        for(int i=0;i<result.length;i++)
+            result[i] = queue.poll();
+        
+        return result;
+    }
+}
