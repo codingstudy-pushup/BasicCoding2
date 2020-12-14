@@ -4,7 +4,7 @@ public int[] topKFrequent(int[] nums, int k) {
         
         Map<Integer, Integer> map = new HashMap<>();
        
-        // calculate the frequencies
+    
         for(int i : nums) {
             if(map.containsKey(i)) {
                 int exist = map.get(i);
@@ -23,7 +23,7 @@ public int[] topKFrequent(int[] nums, int k) {
         int[] a = new int[k];
         int i=0;
         
-        // fetch the top k, max run time is o(k)
+   
         while(!pq.isEmpty() && k-- > 0) {
             int top = (int) pq.poll();
             
@@ -55,9 +55,7 @@ public int[] topKFrequent(int[] nums, int k) {
             else
                 hashmap.put(nums[i],hashmap.get(nums[i])+1);
         }
-        
-        //Building a priorityqueue (Heap)
-        // Bigger to Smaller
+     
         PriorityQueue<Integer> queue = new PriorityQueue<>((a,b) -> hashmap.get(b) - hashmap.get(a));
         
         for(int pointer : hashmap.keySet())
