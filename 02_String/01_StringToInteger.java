@@ -9,20 +9,20 @@ public class 01_StringToInteger {
 	}
 	public static int myAtoi(String str) {
 	    int index = 0, sign = 1, total = 0;
-	    //1. Empty string
+	    //1. 
 	    if(str.length() == 0) return 0;
 
-	    //2. Remove Spaces
+	    //2. 
 	    while(str.charAt(index) == ' ' && index < str.length())
 	        index ++;
 
-	    //3. Handle signs
+	    //3. 
 	    if(str.charAt(index) == '+' || str.charAt(index) == '-'){
 	        sign = str.charAt(index) == '+' ? 1 : -1;
 	        index ++;
 	    }
 	    
-	    //4. Convert number and avoid overflow
+	    //4. 
 	    while(index < str.length()){
 	        int digit = str.charAt(index) - '0';
 	        if(digit < 0 || digit > 9) break;
