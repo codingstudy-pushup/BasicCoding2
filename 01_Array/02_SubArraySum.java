@@ -11,7 +11,9 @@ public class SubArraySum {
 		System.out.println(subarraySum(nums, k));
 		System.out.println(subarraySum2(nums, k));
 	}
-
+//방법1
+// Time complexity : O(n^2)
+// Space complexity : O(1)
 	public static int subarraySum2(int[] nums, int k) {
 		int count = 0;
 		for (int start = 0; start < nums.length; start++) {
@@ -27,7 +29,9 @@ public class SubArraySum {
 		}
 		return count;
 	}
-
+	//방법2
+// Time complexity : O(n)
+// Space complexity : O()
 	public static int subarraySum(int[] nums, int k) {
 		if (nums == null || nums.length == 0) {
 			return -1;
