@@ -36,54 +36,42 @@ public class SortTest02_Com {
 	public List<Interval> merge(List<Interval> intervals) {
 		if (intervals.isEmpty())
 			return intervals;
-
+         
+	    //type1
+//		Collections.sort(intervals,(a,b) -> a.start-b.start);
+		//type2
 		Collections.sort(intervals, comp2);
-//			Collections.sort(intervals,(a,b) -> a.start-b.start);
 
-		List<Interval> ans = new LinkedList<Interval>();
-		Interval hold = intervals.get(0);
+
+		List<Interval> result = new ArrayList<Interval>();
+		Interval before = intervals.get(0);
 		for (int i = 1; i < intervals.size(); i++) {
 			Interval current = intervals.get(i);
-			if (hold.end >= current.start) {
-				System.out.println("hold.end: " + hold.end);
-				hold.end = Math.max(current.end, hold.end);
+			if (before.end >= current.start) {
+				before.end = Math.max(current.end, before.end);
 			} else {
-				System.out.println("22hold.end: " + hold.end);
-				ans.add(hold);
-				hold = current;
+				result.add(before);
+				before = current;
 			}
 		}
 
-		if (!ans.contains(hold)) {
-			System.out.println("333hold.end: " + hold.end);
-			ans.add(hold);
+		if (!result.contains(before)) {
+			System.out.println("before.end: " + before.end);
+			result.add(before);
 		}
 
-		return ans;
+		return result;
 	}
 
-	// 1
+	//type2
 	Comparator comp = new Comparator<Interval>() {
 		public int compare(Interval a, Interval b) {
 			// TODO Auto-generated method stub
 			return a.start - b.start;
 		}
 	};
-	// 2
-//		 리턴값이 int 양수: 현재 인스턴스가 비교대상인 인스턴스보다 크다 
-//	            음수:현재 인스턴스가비교대상인 인스턴스보다 작다
-//	               0 :값이 동일
-	//
-//		public int compare(Interval o1, Interval o2) {
-//			if (o1.start > o2.start) {
-//				return 1;
-//			} else if (o1.start < o2.start) {
-//				return -1;
-//			} else {
-//				return 0;
-//			}
-//		}
 
+	//type3
 	Comparator<Interval> comp2 = new Comparator<Interval>() {
 		@Override
 
