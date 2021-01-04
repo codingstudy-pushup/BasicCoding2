@@ -2,7 +2,7 @@ package aa;
 
 public class Test03 {
 	public static void main(String[] args) {
-		String s = "PAYPALISHIRING";
+		String s = "TESTABCDEFG";
 		int numRows = 3;
 		
 		System.out.println(new Test03().convert(s, numRows));
