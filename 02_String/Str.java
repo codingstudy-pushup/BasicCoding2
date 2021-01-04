@@ -20,7 +20,7 @@ public class ImpleStr {
         
         
         for (int i = 0; i < haystack.length(); i++) {
-            // no enough places for needle after i
+        
             if (i + needle.length() > haystack.length()) break;
             
             for (int j = 0; j < needle.length(); j++) {
