@@ -1,11 +1,14 @@
-package aa;
+package String;
 
-public class ValPa {
+public class Test_charAt_02 {
 
-	public static void main(String[] args) {
+	
+public static void main(String[] args) {
 		
-		String s = "(a(b(c)d)";
-		System.out.println(new ValPa().solve(s));
+//		String s = "(a(b(c)d)";
+//	    String  s = "in(f(lea)r)n)";
+		String  s = "a)b(c)d";
+		System.out.println(new Test_charAt_02().solve(s));
 	}
 	public String solve(String s) {
 		StringBuilder sb = new StringBuilder();
@@ -25,10 +28,11 @@ public class ValPa {
 		StringBuilder result = new StringBuilder();
 		for(int i =sb.length()-1; i >=0; i-- ) {
 			if(sb.charAt(i) =='(' && count-->0 ) continue;
-//			result.append(sb.charAt(i));
-			sb.deleteCharAt(i);
+			result.append(sb.charAt(i));
+			System.out.println("result "+result);
+
 		}
-		return sb.toString();
+		 return result.reverse().toString();
 		
 		
 	}
