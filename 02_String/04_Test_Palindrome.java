@@ -1,34 +1,69 @@
-package String;
-
 public class String_palindrom {
 
 	public static void main(String[] args) {
 		String_palindrom a = new String_palindrom();
 		String s = "bananas";
 
-		System.out.println(a.solve1(s));
+		System.out.println(a.solve(s));
 //			System.out.println(a.solve(s));
 	}
 	
-	 public String solve (String s) {
-	        String max = "";
-	        for (int i = 0; i < s.length(); i++) {
-	            String s1 = findSubstring(s, i, i ,"odd") ;
-	            String s2 = findSubstring(s, i, i + 1,"eve");
-	            System.out.println("s1: "+s1+" s2 "+s2 );
-	            if (s1.length() > max.length()) max = s1;
-	            if (s2.length() > max.length()) max = s2;
-	        }
-	        return max;
+	private int start, maxLen;
+
+	public String solve(String s) {
+		int len = s.length();
+		if (len < 2)
+			return s;
+		
+	    for (int i = 0; i < len-1; i++) {
+	    	findSubstring(s, i, i ,"odd");  //
+	    	findSubstring(s, i, i+1,"even"); //
+	     	System.out.println("");
 	    }
-	    
-	    private String findSubstring(String s, int i, int j, String str) {
-	    	 System.out.println("=s: "+s+" i "+i+" j "+j+" str "+str );
-	        for (; 0 <= i && j < s.length(); i--, j++) {
-	            if (s.charAt(i) != s.charAt(j)) break;
-	        }
-	        String subStr = s.substring(i + 1, j);
-	        System.out.println("=subStr "+subStr);
-	        return subStr;
-	    }
-   }
+	    return s.substring(start, start + maxLen);
+	}
+
+	private void findSubstring(String s, int left, int right, String str) {
+		System.out.println("left "+left+" right "+right+" : "+s.charAt(left)+" "+s.charAt(right)+" str "+str );
+		
+		while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
+			System.out.println("22left "+left+" right "+right+" : "+s.charAt(left)+" "+s.charAt(right)+" str "+str );
+			
+			left--;
+			right++;
+		}
+		if (maxLen < right - left - 1) {
+			start = left + 1;
+			maxLen = right - left - 1;
+		}
+	}
+	
+	
+	public String longestPalindrome_dp(String s) {
+		int n = s.length();
+		String res = null;
+
+		boolean[][] dp = new boolean[n][n];
+
+		for (int i = n - 1; i >= 0; i--) {
+			for (int j = i; j < n; j++) {
+				dp[i][j] = s.charAt(i) == s.charAt(j) && (j - i < 3 || dp[i + 1][j - 1]);
+				System.out.println("dp[" + i + "][" + j + "] " + dp[i][j]);
+
+				if (dp[i][j] && (res == null || j - i + 1 > res.length())) {
+					res = s.substring(i, j + 1);
+				}
+			}
+		}
+		print(dp);
+
+		return res;
+	}
+	public void print(boolean[][] dp) {
+		for(int i=0; i<dp.length; i++) {
+			for(int j=0; j<dp[i].length; j++) {
+				System.out.print(" dp[" + i + "][" + j + "] " + dp[i][j]);
+			}
+			System.out.println();
+		}
+	}
