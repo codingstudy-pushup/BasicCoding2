@@ -28,7 +28,7 @@ public class Array2D {
 		
 		//3. 초기화와 동시에 값을 넣을때
 		int[][] grid3 = {{1,2},
-				         {0,0,3},
+				 {0,0,3},
 		                 {4,5,6}} ;
 		
 		System.out.println("===3 after======");
