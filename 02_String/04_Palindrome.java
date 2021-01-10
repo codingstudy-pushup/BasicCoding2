@@ -18,32 +18,24 @@ public class String_palindrom {
 		for (int i = 0; i < len - 1; i++) {
 			findSubstring(s, i, i, "odd"); //
 			findSubstring(s, i, i + 1, "even"); //
-			System.out.println("");
 		}
 		return s.substring(start, start + end);
 	}
 
 	private void findSubstring(String s, int left, int right, String str) {
-		System.out.println(
-				"left " + left + " right " + right + " : " + s.charAt(left) + " " + s.charAt(right) + " str " + str);
-
 		while (left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)) {
-			System.out.println("=left " + left + " right " + right + " : " + s.charAt(left) + " " + s.charAt(right)
-					+ " str " + str);
-
 			left--;
 			right++;
-			System.out.println("==left " + left + " right " + right + " str " + str);
 		}
 		if (end < right - left - 1) {
 			start = left + 1;
 			end = right - left - 1;
-			System.out.println("start: " + start + " left " + left);
 		}
-		System.out.println("=start: " + start + " end " + end);
 	}
 	
 	
+	
+	//2
 	public String longestPalindrome_dp(String s) {
 		int n = s.length();
 		String res = null;
