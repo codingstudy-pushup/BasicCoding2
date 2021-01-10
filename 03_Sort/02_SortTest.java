@@ -1,61 +1,99 @@
-package a_new_lec;
+package Sort;
 
 import java.util.*;
 
-public class SortTest02 {
+//1
+class Interval {
+	int start;
+	int end;
+
+	Interval(int s, int e) {
+		this.start = s;
+		this.end = e;
+	}
+}
+
+public class SortTest02_Com {
 
 	public static void main(String[] args) {
 
-		LargestNumber a = new LargestNumber();
-		int[] nums = { 10, 9 ,8};
-		System.out.println(a.largestNumber(nums));
+//		int[][] nums = {{1,3},{2,6},{8,10},{15,18}};
+		Interval in1 = new Interval(1, 3);
+		Interval in3 = new Interval(2, 6);
+		Interval in2 = new Interval(8, 10);
+		Interval in4 = new Interval(15, 18);
 
+		List<Interval> intervals = new ArrayList<>();
+		intervals.add(in1);
+		intervals.add(in2);
+		intervals.add(in3);
+		intervals.add(in4);
+		SortTest02_Com a = new SortTest02_Com();
+		a.print(intervals);
+		List<Interval> list = a.merge(intervals);
+		System.out.println("===after====");
+		a.print(list);
+	}
+	
+	
+
+	public List<Interval> merge(List<Interval> intervals) {
+		if (intervals.isEmpty())
+			return intervals;
+		
+		//1.sorting
+		Collections.sort(intervals, comp2);
+//		Collections.sort(intervals, (a,b)-> a.start-b.start);
+
+		List<Interval> result = new ArrayList<>();
+		Interval before = intervals.get(0);
+		for(int i=1; i<intervals.size(); i++) {
+			Interval curr = intervals.get(i);
+			if(before.end  >= curr.start) {
+				before.end = Math.max(curr.end, before.end);  
+			}else {
+				result.add(before);
+				before = curr;
+			}
+		}
+		if(!result.contains(before)) {
+			result.add(before);
+		}
+		return intervals;
+	}
+	
+	Comparator comp = new Comparator<Interval>() {
+		@Override
+		public int compare(Interval a, Interval b) {
+			// TODO Auto-generated method stub
+			return a.start-b.start;
+		}
+	};
+	
+	Comparator comp2 = new Comparator<Interval>() {
+		@Override
+		public int compare(Interval a, Interval b) {
+			// TODO Auto-generated method stub
+			if(a.start < b.start) {
+				return -1;
+			}else if(a.start > b.start) {
+				return 1;
+			}else {
+				return 0;
+			}
+		}
+	};
+    
+	
+	
+
+
+	void print(List<Interval> list) {
+		for (int i = 0; i < list.size(); i++) {
+			Interval in = list.get(i);
+			System.out.println(in.start + " " + in.end);
+		}
 	}
 
-	public String largestNumber(int[] num) {
-		if (num == null || num.length == 0)
-			return "";
-		// Convert int array to String array, so we can sort later on
-		String[] s_num = new String[num.length];
-		for (int i = 0; i < num.length; i++)
-			s_num[i] = String.valueOf(num[i]);
-
-		// Comparator to decide which string should come first in concatenation
-//		Comparator<String> comp = new Comparator<String>() {
-//			@Override
-//			public int compare(String str1, String str2) {
-//				String s1 = str1 + str2;
-//				String s2 = str2 + str1;
-//				System.out.println("s1 "+s1+" s2 "+s2);
-//				
-//				return s2.compareTo(s1);
-//			}
-			
-//			public int compare(String str1, String str2) {
-//				String s1 = str1 + str2;
-//				String s2 = str2 + str1;
-//		        if(s1.compareTo(s2)>0) return -1;
-//		        else if(s1.compareTo(s2)<0) return 1;
-//		        else if(s1.length()<=s2.length()) return -1;
-//		        else return -1;
-//			}
-//		};
-		
-		
-		
-		
-		Arrays.sort(s_num, (a, b) -> (b + a).compareTo(a + b));  
-//		Arrays.sort(s_num, comp);
-		
-		
-		if (s_num[0].charAt(0) == '0')
-			return "0";
-
-		StringBuilder sb = new StringBuilder();
-		for (String s : s_num)
-			sb.append(s);
-
-		return sb.toString();
-
-	}
 }
+
