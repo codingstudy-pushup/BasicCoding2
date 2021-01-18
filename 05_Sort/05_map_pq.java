@@ -7,7 +7,7 @@ public class TopK {
 	public static void main(String[] args) {
 //		String[] words= {"i", "study", "inflearn", "i", "study", "coding"};
 		int k = 2;
-		String[] words= {"a", "b", "c", "a", "b", "c"};
+		String[] words= {"a", "b", "c", "a", "b", "c", "a"};
 		TopK a = new TopK();
 		System.out.println(a.solve(words, k));
 		
@@ -23,7 +23,7 @@ public class TopK {
         }
        //1. PriorityQueue 람다식
        PriorityQueue<Map.Entry<String, Integer>> pq = new PriorityQueue<>(
-                (a,b) -> a.getValue()==b.getValue() ? a.getKey().compareTo(b.getKey()) : a.getValue()-b.getValue()
+                (a,b) -> a.getValue()==b.getValue() ? a.getKey().compareTo(b.getKey()) : b.getValue()-a.getValue()
        );
        
        
@@ -42,11 +42,11 @@ public class TopK {
       
        
        for(Map.Entry<String, Integer> entry: map.entrySet())
-           pq.offer(entry);
+           pq2.offer(entry);
        
        
        while(k>0){
-           result.add(pq.poll().getKey());
+           result.add(pq2.poll().getKey());
            k --;
        }
        return result;
