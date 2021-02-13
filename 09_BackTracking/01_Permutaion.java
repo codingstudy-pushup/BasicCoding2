@@ -25,7 +25,7 @@ public class Permutaion {
 		} else {
 			for (int i = 0; i < nums.length; i++) {
 				if (tempList.contains(nums[i]))
-					continue; // element already exists, skip
+					continue; 
 				System.out.println("i "+i);
 				tempList.add(nums[i]);
 				System.out.println("22tempList: "+tempList);
