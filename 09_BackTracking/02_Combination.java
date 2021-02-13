@@ -18,7 +18,7 @@ public class Combination {
 	public void backtrack(List<List<Integer>> result, ArrayList<Integer> tempList, int n, int k, int start) {
 		if (tempList.size() == k) {
 			result.add(new ArrayList<>(tempList));
-		 //   System.out.println("add tempList: "+tempList);
+	//	    System.out.println("add tempList: "+tempList);
 		}else if (tempList.size() > k) {
 		//	System.out.println("return tempList: "+tempList);
 			return;
