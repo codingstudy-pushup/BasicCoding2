@@ -10,27 +10,27 @@ public class Combination {
 	}
 
 	public List<List<Integer>> solve(int n, int k) {
-		List<List<Integer>> list = new ArrayList<List<Integer>>();
-		backtrack(list, new ArrayList<Integer>(), n, k, 1);
-		return list;
+		List<List<Integer>> result = new ArrayList<List<Integer>>();
+		backtrack(result, new ArrayList<Integer>(), n, k, 1);
+		return result;
 	}
 
-	public void backtrack(List<List<Integer>> list, ArrayList<Integer> templist, int n, int k, int start) {
-		if (templist.size() == k) {
-			list.add(new ArrayList<>(templist));
-		    System.out.println("add tempList: "+templist);
-		}else if (templist.size() > k) {
-			System.out.println("return tempList: "+templist);
+	public void backtrack(List<List<Integer>> result, ArrayList<Integer> tempList, int n, int k, int start) {
+		if (tempList.size() == k) {
+			result.add(new ArrayList<>(tempList));
+		 //   System.out.println("add tempList: "+tempList);
+		}else if (tempList.size() > k) {
+		//	System.out.println("return tempList: "+tempList);
 			return;
 		}
 		
 
 		for (int i = start; i <= n; i++) {
-			templist.add(i);
-			System.out.println("22tempList: "+templist);
-			backtrack(list, templist, n, k, i + 1);
-			templist.remove(templist.size() - 1);
-			System.out.println("remove tempList: "+templist);
+			tempList.add(i);
+			//System.out.println("22tempList: "+tempList);
+			backtrack(result, tempList, n, k, i + 1);
+			tempList.remove(tempList.size() - 1);
+		//	System.out.println("remove tempList: "+tempList);
 		}
 	}
 }
