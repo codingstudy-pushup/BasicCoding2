@@ -18,7 +18,7 @@ public class String_palindrom {
 		System.out.println(a.solve(s));
 	}
 
-	private int start, end;
+	int start, end;
 
 	public String solve(String s) {
 		int len = s.length();
