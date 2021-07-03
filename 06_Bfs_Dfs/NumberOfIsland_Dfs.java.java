@@ -1,6 +1,6 @@
 package Bfs_Dfs;
 
-public class Basic_dfs {
+public class NumberOfIsland_Dfs {
 
 	public static void main(String[] args) {
 		char[][] grid = {
@@ -9,7 +9,7 @@ public class Basic_dfs {
 				{ '0', '0', '1', '0', '0' },
 				{ '0', '0', '0', '1', '1' } };
 
-		Basic_dfs a = new Basic_dfs();
+		NumberOfIsland_Dfs a = new NumberOfIsland_Dfs();
 		System.out.println(a.numsIslands(grid));
 	}
 
